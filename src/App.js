@@ -1,8 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-
+import Timer from './Timer';
 function App() {
-	const [timer, setTimer] = useState({ hour: '', min: '', sec: 0 });
+	const [timer, setTimer] = useState({ hour: 0, min: 0, sec: 60 });
 	const [time, setTime] = useState();
 	const [runner, setRunner] = useState({ hour: null, min: null, sec: null });
 	// console.log('timer', timer);
@@ -18,38 +18,8 @@ function App() {
 		setRunner(timer);
 	}
 	// console.log('runner', runner);
-	useEffect(convert, [timer]);
-	console.log('set', time);
-	// setTimeout(() => {
-	// 	setInterval(() => {
-	// 		console.log('timer is on');
-	// 		setRunner({ ...runner, sec: runner.sec + 1 });
-	// 	}, 2000);
-	// }, time);
-	function runTimer() {
-		console.log('runner called');
-		setInterval(() => {
-			console.log('timer is on');
-			// let h=timer.hour/600
 
-			setRunner(() => ({
-				// ...runner,
-				// hour: runner.min == 0 ? runner.hour-- : runner.hour == 0 ? 59 : '',
-				min:
-					runner.sec > 0 ? runner.min-- : runner.min == 0 ? runner.min - 1 : 0,
-				sec: runner.sec >= 0 ? runner.sec-- : runner.sec == 0 ? 59 : 0,
-			}));
-
-			// if (runner.sec == 10) {
-			// 	setRunner({
-			// 		...runner,
-			// 		sec: runner.sec++,
-			// 		hour: Number(timer.hour - 1),
-			// 	});
-			// }
-		}, 1000);
-	}
-	console.log('runner', runner);
+	console.log('runner');
 	return (
 		<div className="relative">
 			<div className="flex justify-center mt-10 ">
@@ -78,11 +48,12 @@ function App() {
 				</div>
 			</div>
 			<button
-				onClick={() => runTimer()}
+				// onClick={() => runTimer()}
 				className="absolute  bg-red-500 px-2 py-2 top-24 right-1/2 rounded-lg w-16 text-white"
 			>
 				Start
 			</button>
+			<Timer state={timer} />
 		</div>
 	);
 }
